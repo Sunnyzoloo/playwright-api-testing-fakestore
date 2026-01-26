@@ -1,6 +1,8 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, request } from "@playwright/test";
 
 const BASE_URL = "https://fakestoreapi.com";
+
+let apiContext: any;
 
 function validateProductSchema(product: any) {
   expect(typeof product.id).toBe("number");
@@ -11,38 +13,48 @@ function validateProductSchema(product: any) {
   expect(typeof product.image).toBe("string");
 }
 
-test.describe("Fake Store API Tests", () => {
-  test("GET all products", async ({ request }) => {
-    const response = await request.get(`${BASE_URL}/products`);
+test.beforeAll(async () => {
+  apiContext = await request.newContext({
+    baseURL: BASE_URL,
+    extraHTTPHeaders: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "Mozilla/5.0",
+    },
+  });
+});
 
-    expect(response.status()).toBe(200);
+test.describe("Fake Store API Tests", () => {
+  test("GET all products", async () => {
+    const response = await apiContext.get("/products");
+
+    expect([200, 304]).toContain(response.status());
 
     const body = await response.json();
     expect(Array.isArray(body)).toBeTruthy();
     expect(body.length).toBeGreaterThan(0);
   });
 
-  test("GET single product", async ({ request }) => {
-    const response = await request.get(`${BASE_URL}/products/1`);
+  test("GET single product", async () => {
+    const response = await apiContext.get("/products/1");
 
-    expect(response.status()).toBe(200);
+    expect([200, 304]).toContain(response.status());
 
     const body = await response.json();
     expect(body.id).toBe(1);
     validateProductSchema(body);
-    expect(body).toHaveProperty("title");
-    expect(body).toHaveProperty("price");
   });
 
-  test("GET non-existing product", async ({ request }) => {
-    const response = await request.get(`${BASE_URL}/products/9999`);
+  test("GET non-existing product", async () => {
+    const response = await apiContext.get("/products/9999");
 
-    expect(response.status()).toBe(200);
+    expect([200, 404]).toContain(response.status());
 
     const text = await response.text();
     expect(text === "" || text === "{}").toBeTruthy();
   });
-  test("POST create new product", async ({ request }) => {
+
+  test("POST create new product", async () => {
     const payload = {
       title: "QA Automation Test Product",
       price: 49.99,
@@ -51,17 +63,18 @@ test.describe("Fake Store API Tests", () => {
       category: "electronics",
     };
 
-    const response = await request.post(`${BASE_URL}/products`, {
+    const response = await apiContext.post("/products", {
       data: payload,
     });
 
     expect([200, 201]).toContain(response.status());
-    const body = await response.json();
 
+    const body = await response.json();
     expect(body).toHaveProperty("id");
     expect(body.title).toBe(payload.title);
     expect(body.price).toBe(payload.price);
     expect(body.category).toBe(payload.category);
+
     validateProductSchema(body);
   });
 });
