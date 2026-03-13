@@ -2,7 +2,7 @@
 
 Automated API testing project built with **Playwright and TypeScript** to validate REST API endpoints of the FakeStore API.
 
-The project demonstrates **API automation testing**, including status code validation, response schema validation, negative testing, and automated request execution.
+This project demonstrates **API automation testing**, including HTTP status validation, response schema validation, negative testing, and automated API request execution.
 
 ---
 
@@ -18,19 +18,19 @@ The project demonstrates **API automation testing**, including status code valid
 
 ## Test Coverage
 
-The automated test suite validates core FakeStore API endpoints and behaviors.
+The automated test suite validates key FakeStore API endpoints.
 
 ### Endpoints Tested
 
-* **GET /products** — Retrieve all products
-* **GET /products/1** — Retrieve a single product
-* **GET /products/9999** — Validate behavior for non-existing resources
-* **POST /products** — Create a new product
+* **GET /products** – Retrieve all products
+* **GET /products/1** – Retrieve a single product
+* **GET /products/9999** – Validate behavior for non-existing resources
+* **POST /products** – Create a new product
 
 ### Validations Performed
 
 * HTTP response status codes
-* JSON response structure
+* JSON response schema validation
 * API response data accuracy
 * Negative scenarios for invalid resources
 
@@ -38,20 +38,18 @@ The automated test suite validates core FakeStore API endpoints and behaviors.
 
 ## QA Artifacts
 
-This project includes documentation that demonstrates the **API testing workflow**.
+This project includes QA documentation demonstrating the API testing workflow.
 
-Artifacts are located in the `qa-artifacts` folder:
+Artifacts are located in the **`qa-artifacts`** folder:
 
 * API Test Cases
 * API Test Execution Summary
-
-These documents outline the testing strategy, validation rules, and execution results for the API tests.
 
 ---
 
 ## Project Structure
 
-```
+```id="repo-structure"
 playwright-api-testing-fakestore
 │
 ├── api-tests
@@ -70,13 +68,13 @@ playwright-api-testing-fakestore
 
 Install dependencies:
 
-```bash
+```bash id="install"
 npm install
 ```
 
 Run the API test suite:
 
-```bash
+```bash id="run-tests"
 npx playwright test
 ```
 
@@ -84,5 +82,5 @@ npx playwright test
 
 ## Author
 
-**Zoljargal Enkhbayar**
+Zoljargal Enkhbayar
 Computer Science – Saint Cloud State University
