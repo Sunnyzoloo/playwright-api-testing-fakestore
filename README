@@ -2,7 +2,7 @@
 
 Automated API testing project built with **Playwright and TypeScript** to validate REST API endpoints of the FakeStore API.
 
-This project demonstrates API testing techniques including **HTTP status validation, response schema validation, negative testing, and automated API request execution**.
+The project demonstrates **API automation testing**, including status code validation, response schema validation, negative testing, and automated request execution.
 
 ---
 
@@ -18,14 +18,16 @@ This project demonstrates API testing techniques including **HTTP status validat
 
 ## Test Coverage
 
-The automated tests validate the following API endpoints and behaviors:
+The automated test suite validates core FakeStore API endpoints and behaviors.
 
-* **GET /products** – Retrieve all products
-* **GET /products/1** – Retrieve a single product
-* **GET /products/9999** – Validate handling of non-existing resources
-* **POST /products** – Create a new product
+### Endpoints Tested
 
-The tests verify:
+* **GET /products** — Retrieve all products
+* **GET /products/1** — Retrieve a single product
+* **GET /products/9999** — Validate behavior for non-existing resources
+* **POST /products** — Create a new product
+
+### Validations Performed
 
 * HTTP response status codes
 * JSON response structure
@@ -36,14 +38,14 @@ The tests verify:
 
 ## QA Artifacts
 
-This project includes QA documentation demonstrating the API testing process.
+This project includes documentation that demonstrates the **API testing workflow**.
 
-Artifacts are located in the **`qa-artifacts`** folder:
+Artifacts are located in the `qa-artifacts` folder:
 
 * API Test Cases
 * API Test Execution Summary
 
-These documents outline the test scenarios, validation strategy, and execution results for the automated API tests.
+These documents outline the testing strategy, validation rules, and execution results for the API tests.
 
 ---
 
@@ -52,14 +54,14 @@ These documents outline the test scenarios, validation strategy, and execution r
 ```
 playwright-api-testing-fakestore
 │
-├── tests
-│
 ├── api-tests
 │   └── fakestore-api.spec.ts
 │
-└── qa-artifacts
-    ├── api-test-cases.md
-    └── api-test-summary.md
+├── qa-artifacts
+│   ├── api-test-cases.md
+│   └── api-test-summary.md
+│
+└── README.md
 ```
 
 ---
@@ -82,5 +84,5 @@ npx playwright test
 
 ## Author
 
-Zoljargal Enkhbayar
+**Zoljargal Enkhbayar**
 Computer Science – Saint Cloud State University
